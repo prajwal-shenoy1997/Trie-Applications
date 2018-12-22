@@ -6,8 +6,7 @@ const int alphabets  =26;
 
 struct Node{
 
-    struct Node* children [alphabets]={};
-    int occurences;
+    struct Node* children [alphabets]={};                     //Initialise the children pointers to NULL to start with
     bool flag;
 
 };
@@ -16,7 +15,7 @@ void insert_trie(struct Node * trietree,char * word)
 struct Node * current=trietree;// current node so that the address of root of the trie is not lost
 while(*word!='\0'){
 
-    if(current->children[*word-'a']==NULL)
+    if(current->children[*word-'a']==NULL)	
     {
         current->children[*word-'a']= (struct Node *) calloc(1, sizeof(struct Node)); //If there is no path along,create space
     }
@@ -89,14 +88,14 @@ while(infile.good()){
 	infile>>word;
 }
 
-vector <char > ch;
+vector <char> ch;
 cout<<"enter the word to be searched"<<endl;
 cin>>word;
 Node* temp=search_trie(trietree,word);
 if(temp==NULL)
-    cout<<"NO word with this prefix in dictionary "<<endl;
+    cout<<"No words found with this prefix in the dictionary "<<endl;
 else
-autocomplete(temp,ch,word);
+autocomplete(temp,ch,word);                //Move forward allowing recursions
 
     return 0;
 }
